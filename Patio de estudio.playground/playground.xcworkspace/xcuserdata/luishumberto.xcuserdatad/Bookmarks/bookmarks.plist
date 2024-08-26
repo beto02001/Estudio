@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>top-level-items</key>
+	<array>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>60</string>
+					<key>EndingLineNumber</key>
+					<string>31</string>
+					<key>StartingColumnNumber</key>
+					<string>9</string>
+					<key>StartingLineNumber</key>
+					<string>31</string>
+					<key>Timestamp</key>
+					<string>746385253.236269</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>Patio de estudio.playground/Pages/Seguridad en Apps.xcplaygroundpage</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>saveCredentials(username: String, password: String)</string>
+				<key>leading</key>
+				<string>    
+    // Función para guardar credenciales en el Keychain
+    func </string>
+				<key>trailing</key>
+				<string> {
+        // Implementar guardado en Keychain aquí
+        let pass = password.data(using: String.Encoding.utf8)!
+</string>
+			</dict>
+			<key>title</key>
+			<string>Guardar user y pass keychain</string>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>28</string>
+					<key>EndingLineNumber</key>
+					<string>49</string>
+					<key>StartingColumnNumber</key>
+					<string>9</string>
+					<key>StartingLineNumber</key>
+					<string>49</string>
+					<key>Timestamp</key>
+					<string>746385295.515625</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>Patio de estudio.playground/Pages/Seguridad en Apps.xcplaygroundpage</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>retrieveCredentials</string>
+				<key>leading</key>
+				<string>    
+    // Función para obtener credenciales desde el Keychain
+    func </string>
+				<key>trailing</key>
+				<string>() -&gt; (username: String, password: String)? {
+        // Implementar recuperación desde el Keychain aquí
+        /// Primero se crea un diccionario de consulta
+</string>
+			</dict>
+			<key>title</key>
+			<string>obtener  credenciales</string>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+	</array>
+</dict>
+</plist>
