@@ -27,13 +27,14 @@ class SecureDataManager {
         case unhandledError(status: OSStatus)
     }
     let server = "www.server.mx"
+    let context = LAContext()
     
     // Función para guardar credenciales en el Keychain
     func saveCredentials(username: String, password: String) {
         // Implementar guardado en Keychain aquí
         let pass = password.data(using: String.Encoding.utf8)!
         var query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
+            kSecClass as String: kSecClassInternetPassword,
             kSecAttrAccount as String: username,
             kSecAttrServer as String: server,
             kSecValueData as String: pass
@@ -51,7 +52,7 @@ class SecureDataManager {
         // Implementar recuperación desde el Keychain aquí
         /// Primero se crea un diccionario de consulta
         var query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
+            kSecClass as String: kSecClassInternetPassword,
             kSecAttrServer as String: server,
             kSecMatchLimit as String: kSecMatchLimitOne,
             kSecReturnAttributes as String: true,
@@ -74,14 +75,33 @@ class SecureDataManager {
     }
     
     // Función para proteger datos con Data Protection
-    func protectSensitiveData(data: Data) -> Bool {
-        // Implementar protección de datos aquí
-        return false
-    }
+        func protectSensitiveData(data: Data, fileName: String) -> Bool {
+            // Ruta donde se guardarán los datos en el sistema de archivos
+            let fileManager = FileManager.default
+            guard let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
+                print("No se pudo encontrar el directorio")
+                return false
+            }
+            
+            let fileURL = documentDirectory.appendingPathComponent(fileName)
+            
+            // Opciones de protección de datos
+            /// Usamos .completeFileProtection, que asegura que los datos estén cifrados cuando el dispositivo está bloqueado. Hay otros niveles de protección que puedes explorar según tus necesidades (.completeFileProtectionUntilFirstUserAuthentication, .completeFileProtectionUnlessOpen, etc.).
+            let options: Data.WritingOptions = [.atomic, .completeFileProtection]
+            
+            do {
+                // Escribir los datos al archivo con protección completa
+                try data.write(to: fileURL, options: options)
+                print("Datos protegidos correctamente")
+                return true
+            } catch {
+                print("Error al proteger los datos: \(error)")
+                return false
+            }
+        }
     
     // Función para autenticar al usuario usando Face ID/Touch ID
     func authenticateUser(completion: @escaping (Bool, Error?) -> Void) {
-        let context = LAContext()
         var error: NSError?
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Acceso a información sensible") { success, authenticationError in
@@ -98,6 +118,13 @@ class SecureDataManager {
 var keychain = SecureDataManager()
 
 keychain.saveCredentials(username: "beto02001", password: "2001")
+
+keychain.authenticateUser { succes, error in
+    guard error != nil else {
+        print(error)
+        return
+    }
+}
 
 var (usuario, contrasena) = keychain.retrieveCredentials() ?? ("", "")
 
