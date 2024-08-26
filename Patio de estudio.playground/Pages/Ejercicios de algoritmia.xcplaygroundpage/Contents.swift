@@ -253,6 +253,7 @@ func maxSubArraySum(_ nums: [Int]) -> [Int] {
     print(conjunto)
     return conjunto
 }
+
 var arreglo = [-2, 1, -3, 4, -6, 2, 2, -5, 4]
 maxSubArraySum(arreglo)
 
